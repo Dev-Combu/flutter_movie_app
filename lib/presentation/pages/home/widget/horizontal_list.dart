@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_movie_app/presentation/pages/detail_page.dart';
+import 'package:flutter_movie_app/presentation/pages/detail/detail_page.dart';
 
 class HorizontaList extends StatelessWidget {
   @override
@@ -7,7 +7,6 @@ class HorizontaList extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text("현재 상영중"),
         SizedBox(
           height: 180,
           child: ListView.builder(
@@ -20,11 +19,15 @@ class HorizontaList extends StatelessWidget {
                 },
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: SizedBox(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20)
+                    ),
                     width: 100,
                     child: Image.network(
                         'https://picsum.photos/200/300',
                         fit: BoxFit.cover,
+                        
                       ),
                   ),
                 ),
