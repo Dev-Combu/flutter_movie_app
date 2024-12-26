@@ -18,17 +18,16 @@ class HorizontaList extends StatelessWidget {
                   Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailPage()));
                 },
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20)
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: SizedBox(
+                      width: 120,
+                      child: Image.network(
+                          'https://picsum.photos/200/300',
+                          fit: BoxFit.cover,
+                        ),
                     ),
-                    width: 100,
-                    child: Image.network(
-                        'https://picsum.photos/200/300',
-                        fit: BoxFit.cover,
-                        
-                      ),
                   ),
                 ),
               );
