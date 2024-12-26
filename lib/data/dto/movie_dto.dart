@@ -1,7 +1,7 @@
 import 'dart:core';
 
 class MovieDto {
-  String adult;
+  bool adult;
   List<int> genre_ids;
   int id;
   String original_title;
@@ -28,18 +28,19 @@ class MovieDto {
   MovieDto.fromJson(Map<String, dynamic> json)
       : this(
           adult: json['adult'],
-          genre_ids: json['genre_ids'],
+          genre_ids: List<int>.from(json['genre_ids']),
           id: json['id'],
           original_title: json['original_title'],
           overview: json['overview'],
           popularity: json['popularity'],
           poster_path: json['poster_path'],
           release_date: json['release_date'],
-          vote_average: json['vote_average'],
-          vote_count: json['vote_count'],
+          vote_average: json['vote_average'].toString(),
+          vote_count: json['vote_count'].toString(),
         );
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() {
+    return{
         'adult': adult,
         'genre_ids': genre_ids,
         'id': id,
@@ -50,5 +51,6 @@ class MovieDto {
         'release_date': release_date,
         'vote_average': vote_average,
         'vote_count': vote_count,
-      };
+    };
+      }
 }

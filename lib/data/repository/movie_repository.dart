@@ -8,24 +8,23 @@ class MovieRepository {
     final client = Client();
     final response = await client.get(
         Uri.parse(
-            'https://api.themoviedb.org/3/discover/movie?api_key='),
+            'https://api.themoviedb.org/3/discover/movie?api_key=aeef2b4c8153f329c7733b4fe08dbe38'),
         headers: {
-          'Authorization': 'aeef2b4c8153f329c7733b4fe08dbe38',
-          'accept': 'application/json',
-          'host': 'api.themoviedb.org'
+          'Authorization': 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhZWVmMmI0YzgxNTNmMzI5Yzc3MzNiNGZlMDhkYmUzOCIsIm5iZiI6MTczNTAzMzI4OC44MjgsInN1YiI6IjY3NmE4MWM4NDE2YTM0NDNiNWE5ZjI0MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.HSzwXHJUZJr6kChfsngXPoMJTbCdTjNVLr-pg9YWV5E',
+          'Accept': 'application/json',
         });
 
     if (response.statusCode == 200) {
       Map<String, dynamic> map = jsonDecode(response.body);
-      final items = List.from(map['results']);
-      final iterable = items.map((e) {
+      final results = List.from(map['results']);
+      final iterable = results.map((e) {
         return MovieDto.fromJson(e);
       });
 
       final list = iterable.toList();
       return list;
     }
-
+    print('Error: ${response.statusCode}');
     return [];
   }
 }
