@@ -1,11 +1,13 @@
 import 'dart:convert';
-
+import 'package:flutter_movie_app/data/data_source/movie_data_source.dart';
 import 'package:flutter_movie_app/data/dto/movie_dto.dart';
 import 'package:http/http.dart';
 
-class MovieRepository {
-  Future<List<MovieDto>> movieList() async {
-    final client = Client();
+class MovieAssetDataSourceImpl implements MovieDataSource{
+
+  @override
+  Future<List<MovieDto>> fetchMovies() async {
+     final client = Client();
     final response = await client.get(
         Uri.parse(
             'https://api.themoviedb.org/3/discover/movie?api_key=aeef2b4c8153f329c7733b4fe08dbe38'),

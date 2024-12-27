@@ -1,5 +1,5 @@
 import 'package:flutter_movie_app/data/dto/movie_dto.dart';
 
 abstract interface class MovieDataSource {
-  Future<List<MovieDto>> fetchMoives();
+  Future<List<MovieDto>> fetchMovies();
 }
