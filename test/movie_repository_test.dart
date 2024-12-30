@@ -1,6 +1,5 @@
 
 import 'package:flutter_movie_app/data/data_source/movie_asset_data_source_impl.dart';
-import 'package:flutter_movie_app/domain/repository/movie_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

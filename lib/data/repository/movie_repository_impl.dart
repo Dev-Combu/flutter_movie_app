@@ -22,7 +22,11 @@ class MovieRepositoryImpl implements MovieRepository{
               poster_path: e.poster_path,
               release_date: e.release_date,
               vote_average: e.vote_average,
-              vote_count: e.vote_count,
+              vote_count: e.vote_count, 
+              backdroppath: e.backdroppath, 
+              original_language: e.original_language, 
+              title: e.title, 
+              video: e.video,
             ))
         .toList();
     

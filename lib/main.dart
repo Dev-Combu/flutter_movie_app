@@ -3,7 +3,7 @@ import 'package:flutter_movie_app/presentation/pages/home/home_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
-  const ProviderScope(child: MyApp());
+   runApp(ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
