@@ -6,11 +6,11 @@ import 'package:http/http.dart';
 class MovieAssetDataSourceImpl implements MovieDataSource{
 
   @override
-  Future<List<MovieDto>> fetchMovies() async {
+  Future<List<MovieDto>> fetchMovies(String category) async {
     final client = Client();
     final response = await client.get(
         Uri.parse(
-            'https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1&api_key=aeef2b4c8153f329c7733b4fe08dbe38'),
+            'https://api.themoviedb.org/3/movie/$category?language=ko-KR&page=1&api_key=aeef2b4c8153f329c7733b4fe08dbe38'),
         headers: {
           'Authorization': 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhZWVmMmI0YzgxNTNmMzI5Yzc3MzNiNGZlMDhkYmUzOCIsIm5iZiI6MTczNTAzMzI4OC44MjgsInN1YiI6IjY3NmE4MWM4NDE2YTM0NDNiNWE5ZjI0MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.HSzwXHJUZJr6kChfsngXPoMJTbCdTjNVLr-pg9YWV5E',
           'Accept': 'application/json',

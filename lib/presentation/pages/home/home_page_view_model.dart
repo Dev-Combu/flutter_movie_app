@@ -5,12 +5,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class HomePageViewModel extends Notifier<List<Movie>?>{
   @override
   List<Movie>? build() {
-    fetchMovies();
     return null;
   }
   
-  Future<void> fetchMovies() async {
-    state = await ref.read(fetchMoviesUsecaseProvider).execute();
+  Future<void> fetchMovies(String category) async {
+    state = await ref.read(fetchMoviesUsecaseProvider(category)).execute(category);
   }
 }
 

@@ -43,7 +43,7 @@ class MovieDto {
           original_title: json['original_title'],
           overview: json['overview'],
           popularity: json['popularity'],
-          poster_path: json['poster_path'],
+          poster_path: json['poster_path']?? '',
           release_date: json['release_date'],
           title: json['title'],
           video: json['video'],

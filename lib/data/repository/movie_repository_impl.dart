@@ -1,15 +1,18 @@
 import 'package:flutter_movie_app/data/data_source/movie_data_source.dart';
 import 'package:flutter_movie_app/domain/entity/movie.dart';
 import 'package:flutter_movie_app/domain/repository/movie_repository.dart';
+import 'package:http/http.dart';
 
 class MovieRepositoryImpl implements MovieRepository{
-  MovieRepositoryImpl(this._movieDataSource);
+  MovieRepositoryImpl(this._movieDataSource, this.category);
   final MovieDataSource _movieDataSource;
+
+  final String category;
 
 
   @override
-  Future<List<Movie>> fetchMovies() async{
-    final result = await _movieDataSource.fetchMovies();
+  Future<List<Movie>> fetchMovies(String category) async{
+    final result = await _movieDataSource.fetchMovies(category);
     return result
     .map(
       (e) => Movie(

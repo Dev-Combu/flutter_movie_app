@@ -10,16 +10,15 @@ final movieDataSourceProvider = Provider<MovieDataSource>((ref) {
   return MovieAssetDataSourceImpl();
 });
 
-final movieRepositoryProvider = Provider<MovieRepository>(
-  (ref) {
-    final dataSource =ref.read(movieDataSourceProvider);
-    return MovieRepositoryImpl(dataSource);
-  }
-);
+final movieRepositoryProvider =
+    Provider.family<MovieRepository, String>((ref, String category) {
+  final dataSource = ref.read(movieDataSourceProvider);
+  return MovieRepositoryImpl(dataSource, category);
+});
 
-final fetchMoviesUsecaseProvider = Provider(
-  (ref) {
-    final movieRepo = ref.read(movieRepositoryProvider);
+final fetchMoviesUsecaseProvider = Provider.family(
+  (ref, String category) {
+    final movieRepo = ref.read(movieRepositoryProvider(category));
     return FetchMoviesUsecase(movieRepo);
   },
 );

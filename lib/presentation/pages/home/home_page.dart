@@ -13,37 +13,36 @@ class HomePage extends ConsumerWidget {
     final movies = ref.watch(homepageListViewModel);
 
     return Scaffold(
-      body: movies == null
-          ? const Center(child: CircularProgressIndicator()) // 데이터 로딩 중
-          : ListView(
-              children: [
-                HomePageLabel(label: '가장 인기있는'),
-                Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return DetailPage();
-                          },
-                        ),
-                      );
+      body: ListView(
+        children: [
+          HomePageLabel(label: '가장 인기있는'),
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return DetailPage();
                     },
-                    child: AspectRatio(
-                      aspectRatio: 2 / 3,
-                      child: Image.network(
-                        'https://image.tmdb.org/t/p/w400${movies[0].poster_path}',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
                   ),
+                );
+              },
+              child: AspectRatio(
+                aspectRatio: 2 / 3,
+                child: Image.network(
+                  'https://image.tmdb.org/t/p/w400${movies?[0].poster_path}',
+                  fit: BoxFit.cover,
                 ),
-                HomePageLabel(label: '인기순'),
-                HorizontalList(),
-              ],
+              ),
             ),
+          ),
+          HomePageLabel(label: '인기순'),
+          HorizontalList(category: 'now_playing'),
+          HorizontalList(category: 'upcoming'),
+        ],
+      ),
     );
   }
 }
