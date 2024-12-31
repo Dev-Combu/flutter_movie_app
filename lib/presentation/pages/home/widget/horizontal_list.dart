@@ -1,32 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_movie_app/domain/entity/movie.dart';
 import 'package:flutter_movie_app/presentation/pages/detail/detail_page.dart';
 import 'package:flutter_movie_app/presentation/pages/home/home_page_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HorizontalList extends ConsumerStatefulWidget {
 
-  final String category;
-
-  const HorizontalList({super.key, required this.category});
+  const HorizontalList({super.key});
 
   @override
   ConsumerState<HorizontalList> createState() => _HorizontalListState();
 }
 
 class _HorizontalListState extends ConsumerState<HorizontalList> {
-
-    @override
-      void initState() {
-    super.initState();
-    // 위젯이 생성될 때 fetchMovies 호출
-    fetchMovies(widget.category);
-  }
-  
-  void fetchMovies(String text){
-    ref.read(homepageListViewModel.notifier).fetchMovies(text);
-    print('fetchmovie 호출');
-  }
 
   @override
   Widget build(BuildContext context) {

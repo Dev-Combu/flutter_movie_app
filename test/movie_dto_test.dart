@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:flutter_movie_app/data/dto/movie_dto.dart';
+import 'package:flutter_movie_app/data/dto/movie_response_dto.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -28,7 +28,7 @@ void main() {
    }
 """;
 
-      final movie = MovieDto.fromJson(jsonDecode(sampleJsonString));
+      final movie = MovieResponseDto.fromJson(jsonDecode(sampleJsonString));
       expect(movie.vote_count, '27380');
       expect(movie.poster_path, '/9cqNxx0GxF0bflZmeSMuL5tnGzr.jpg');
     },

@@ -5,11 +5,24 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class HomePageViewModel extends Notifier<List<Movie>?>{
   @override
   List<Movie>? build() {
+    fetchPopularMovies();
     return null;
   }
   
-  Future<void> fetchMovies(String category) async {
-    state = await ref.read(fetchMoviesUsecaseProvider(category)).execute(category);
+  Future<void> fetchNowPlayingMovies() async {
+    state = await ref.read(fetchMoviesUsecaseProvider).fetchNowPlayingMoviesExecute();
+  }
+
+  Future<void> fetchPopularMovies() async {
+    state = await ref.read(fetchMoviesUsecaseProvider).fetchPopularMoviesExecute();
+  }
+
+  Future<void> fetchTopRatedMovies() async {
+    state = await ref.read(fetchMoviesUsecaseProvider).fetchTopRatedMoviesExecute();
+  }
+
+  Future<void> fetchUpcomingMovies() async {
+    state = await ref.read(fetchMoviesUsecaseProvider).fetchUpcomingMoviesExecute();
   }
 }
 

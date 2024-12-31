@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   test('movierepository test', () async {
     MovieAssetDataSourceImpl movieRepository = MovieAssetDataSourceImpl();
-    final movies = await movieRepository.fetchMovies('upcoming');
+    final movies = await movieRepository.fetchNowPlayingMovies();
     expect(movies.isEmpty, false);
     for(var movie in movies){
       print(movie.toJson());

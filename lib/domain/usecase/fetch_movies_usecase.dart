@@ -5,7 +5,17 @@ class FetchMoviesUsecase {
   FetchMoviesUsecase(this._movieRepository);
   final MovieRepository _movieRepository;
 
-  Future<List<Movie>> execute(String category) async{
-    return await _movieRepository.fetchMovies(category);
+  Future<List<Movie>?> fetchNowPlayingMoviesExecute() async{
+    return await _movieRepository.fetchNowPlayingMovies();
+  }
+
+    Future<List<Movie>?> fetchPopularMoviesExecute() async{
+    return await _movieRepository.fetchPopularMovies();
+  }
+    Future<List<Movie>?> fetchTopRatedMoviesExecute() async{
+    return await _movieRepository.fetchTopRatedMovies();
+  }
+    Future<List<Movie>?> fetchUpcomingMoviesExecute() async{
+    return await _movieRepository.fetchUpcomingMovies();
   }
 }

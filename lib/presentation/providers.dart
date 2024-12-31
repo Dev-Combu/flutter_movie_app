@@ -1,4 +1,4 @@
-import 'package:flutter/services.dart';
+
 import 'package:flutter_movie_app/data/data_source/movie_asset_data_source_impl.dart';
 import 'package:flutter_movie_app/data/data_source/movie_data_source.dart';
 import 'package:flutter_movie_app/data/repository/movie_repository_impl.dart';
@@ -10,15 +10,16 @@ final movieDataSourceProvider = Provider<MovieDataSource>((ref) {
   return MovieAssetDataSourceImpl();
 });
 
-final movieRepositoryProvider =
-    Provider.family<MovieRepository, String>((ref, String category) {
-  final dataSource = ref.read(movieDataSourceProvider);
-  return MovieRepositoryImpl(dataSource, category);
-});
+final movieRepositoryProvider = Provider<MovieRepository>(
+  (ref) {
+    final dataSource =ref.read(movieDataSourceProvider);
+    return MovieRepositoryImpl(dataSource);
+  }
+);
 
-final fetchMoviesUsecaseProvider = Provider.family(
-  (ref, String category) {
-    final movieRepo = ref.read(movieRepositoryProvider(category));
+final fetchMoviesUsecaseProvider = Provider(
+  (ref) {
+    final movieRepo = ref.read(movieRepositoryProvider);
     return FetchMoviesUsecase(movieRepo);
   },
 );

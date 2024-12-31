@@ -1,6 +1,6 @@
 import 'dart:core';
 
-class MovieDto {
+class MovieResponseDto {
   bool adult;
   String backdroppath;
   List<int> genre_ids;
@@ -16,7 +16,7 @@ class MovieDto {
   String vote_average;
   String vote_count;
 
-  MovieDto({
+  MovieResponseDto({
     required this.adult,
     required this.backdroppath,
     required this.genre_ids,
@@ -33,7 +33,7 @@ class MovieDto {
     required this.vote_count,
   });
 
-  MovieDto.fromJson(Map<String, dynamic> json)
+  MovieResponseDto.fromJson(Map<String, dynamic> json)
       : this(
           adult: json['adult'],
           backdroppath: json['backgroppath'] ?? '',
@@ -51,7 +51,7 @@ class MovieDto {
           vote_count: json['vote_count'].toString(),
         );
 
-  MovieDto copyWith({
+  MovieResponseDto copyWith({
     bool? adult,
     String? backdroppath,
     List<int>? genre_ids,
@@ -67,7 +67,7 @@ class MovieDto {
     String? vote_average,
     String? vote_count,
   }) =>
-      MovieDto(
+      MovieResponseDto(
         adult: adult ?? this.adult,
         backdroppath: backdroppath ?? this.backdroppath,
         genre_ids: genre_ids ?? this.genre_ids,
