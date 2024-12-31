@@ -46,7 +46,7 @@ class _HorizontalListState extends ConsumerState<HorizontalList> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => DetailPage(),
+                        builder: (context) => DetailPage(movie.id),
                       ),
                     );
                   },

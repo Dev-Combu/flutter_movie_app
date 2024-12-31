@@ -22,7 +22,7 @@ class HomePage extends ConsumerWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return DetailPage();
+                      return DetailPage(ref.watch(homepageListViewModel)[MovieCategory.popular]!.first.id);
                     },
                   ),
                 );

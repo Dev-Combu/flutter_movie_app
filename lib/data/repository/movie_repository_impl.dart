@@ -1,10 +1,12 @@
 import 'package:flutter_movie_app/data/data_source/movie_data_source.dart';
-import 'package:flutter_movie_app/data/dto/movie_response_dto.dart';
 import 'package:flutter_movie_app/domain/entity/movie.dart';
+import 'package:flutter_movie_app/domain/entity/movie_detail.dart';
 import 'package:flutter_movie_app/domain/repository/movie_repository.dart';
 
 class MovieRepositoryImpl implements MovieRepository {
-  MovieRepositoryImpl(this._movieDataSource,);
+  MovieRepositoryImpl(
+    this._movieDataSource,
+  );
   final MovieDataSource _movieDataSource;
 
   @override
@@ -98,8 +100,36 @@ class MovieRepositoryImpl implements MovieRepository {
             ))
         .toList();
   }
-}
 
-extension on Future<List<MovieResponseDto>> Function() {
-  map(Movie Function(dynamic e) param0) {}
+  @override
+  Future<MovieDetail?> fetchMovieDetail(int id) async {
+    final e = await _movieDataSource.fetchMovieDetail(id);
+    return MovieDetail(
+        adult: e.adult,
+        backdropPath: e.backdropPath,
+        id: e.id,
+        originalLanguage: e.originalLanguage,
+        budget: e.budget,
+        genres: e.genres,
+        homepage: e.homepage,
+        imdbId: e.imdbId,
+        productionCompanies: e.productionCompanies,
+        productionCountries: e.productionCountries,
+        revenue: e.revenue,
+        runtime: e.runtime,
+        spokenLanguages: e.spokenLanguages,
+        status: e.status,
+        tagline: e.tagline,
+        originalTitle: e.originalTitle,
+        overview: e.overview,
+        popularity: e.popularity,
+        posterPath: e.posterPath,
+        releaseDate: e.releaseDate,
+        title: e.title,
+        video: e.video,
+        voteAverage: e.voteAverage,
+        voteCount: e.voteCount,
+        belongsToCollection: '',
+        originCountry: []);
+  }
 }

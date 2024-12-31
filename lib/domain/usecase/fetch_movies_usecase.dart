@@ -1,4 +1,5 @@
 import 'package:flutter_movie_app/domain/entity/movie.dart';
+import 'package:flutter_movie_app/domain/entity/movie_detail.dart';
 import 'package:flutter_movie_app/domain/repository/movie_repository.dart';
 
 class FetchMoviesUsecase {
@@ -17,5 +18,9 @@ class FetchMoviesUsecase {
   }
     Future<List<Movie>?> fetchUpcomingMoviesExecute() async{
     return await _movieRepository.fetchUpcomingMovies();
+  }
+
+  Future<MovieDetail?> fetchMovieDetailExcute(int id) async {
+    return await _movieRepository.fetchMovieDetail(id);
   }
 }
