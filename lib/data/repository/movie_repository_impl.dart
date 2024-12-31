@@ -9,7 +9,7 @@ class MovieRepositoryImpl implements MovieRepository {
 
   @override
   Future<List<Movie>?> fetchNowPlayingMovies() async {
-    final result = await _movieDataSource.fetchNowPlayingMovies;
+    final result = await _movieDataSource.fetchNowPlayingMovies();
     return result
         .map((e) => Movie(
               adult: e.adult,

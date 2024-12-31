@@ -4,14 +4,21 @@ import 'package:flutter_movie_app/presentation/pages/home/home_page_view_model.d
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HorizontalList extends ConsumerStatefulWidget {
+  final MovieCategory category;
 
-  const HorizontalList({super.key});
+  const HorizontalList({super.key, required this.category});
 
   @override
   ConsumerState<HorizontalList> createState() => _HorizontalListState();
 }
 
 class _HorizontalListState extends ConsumerState<HorizontalList> {
+  @override
+  void initState() {
+    super.initState();
+    // 카테고리에 맞는 영화 데이터를 불러옵니다.
+    ref.read(homepageListViewModel.notifier).fetchMoviesForCategory(widget.category);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,12 +28,14 @@ class _HorizontalListState extends ConsumerState<HorizontalList> {
         SizedBox(
           height: 180,
           child: Consumer(builder: (context, ref, child) {
-        final movies = ref.watch(homepageListViewModel);
-        if (movies == null) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        }
+            // category에 맞는 데이터를 가져옵니다.
+            final movies = ref.watch(homepageListViewModel)[widget.category];
+            if (movies == null) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+
             return ListView.builder(
               itemCount: movies.length,
               scrollDirection: Axis.horizontal,
@@ -35,9 +44,11 @@ class _HorizontalListState extends ConsumerState<HorizontalList> {
                 return GestureDetector(
                   onTap: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => DetailPage()));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DetailPage(),
+                      ),
+                    );
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 5),
@@ -46,7 +57,9 @@ class _HorizontalListState extends ConsumerState<HorizontalList> {
                       child: SizedBox(
                         width: 120,
                         child: Image.network(
-                          'https://image.tmdb.org/t/p/w400${movie.poster_path}',
+                                  movie.poster_path.isNotEmpty
+                              ? 'https://image.tmdb.org/t/p/w400${movie.poster_path}'
+                              : 'https://via.placeholder.com/400${movie.backdroppath}', // 대체 이미지 URL
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -54,9 +67,8 @@ class _HorizontalListState extends ConsumerState<HorizontalList> {
                   ),
                 );
               },
-              );
-          }
-          ),
+            );
+          }),
         ),
       ],
     );

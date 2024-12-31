@@ -2,29 +2,56 @@ import 'package:flutter_movie_app/domain/entity/movie.dart';
 import 'package:flutter_movie_app/presentation/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HomePageViewModel extends Notifier<List<Movie>?>{
+enum MovieCategory {
+  nowPlaying,
+  popular,
+  topRated,
+  upcoming,
+}
+
+class HomePageViewModel extends Notifier<Map<MovieCategory, List<Movie>?>> {
   @override
-  List<Movie>? build() {
-    fetchPopularMovies();
-    return null;
-  }
-  
-  Future<void> fetchNowPlayingMovies() async {
-    state = await ref.read(fetchMoviesUsecaseProvider).fetchNowPlayingMoviesExecute();
-  }
-
-  Future<void> fetchPopularMovies() async {
-    state = await ref.read(fetchMoviesUsecaseProvider).fetchPopularMoviesExecute();
+  Map<MovieCategory, List<Movie>?> build() {
+    return {
+      MovieCategory.nowPlaying: null,
+      MovieCategory.popular: null,
+      MovieCategory.topRated: null,
+      MovieCategory.upcoming: null,
+    };
   }
 
-  Future<void> fetchTopRatedMovies() async {
-    state = await ref.read(fetchMoviesUsecaseProvider).fetchTopRatedMoviesExecute();
-  }
-
-  Future<void> fetchUpcomingMovies() async {
-    state = await ref.read(fetchMoviesUsecaseProvider).fetchUpcomingMoviesExecute();
+  Future<void> fetchMoviesForCategory(MovieCategory category) async {
+    try {
+      List<Movie> movies = [];
+      switch (category) {
+        case MovieCategory.nowPlaying:
+          movies = (await ref.read(fetchMoviesUsecaseProvider).fetchNowPlayingMoviesExecute())!;
+          break;
+        case MovieCategory.popular:
+          movies = (await ref.read(fetchMoviesUsecaseProvider).fetchPopularMoviesExecute())!;
+          break;
+        case MovieCategory.topRated:
+          movies = (await ref.read(fetchMoviesUsecaseProvider).fetchTopRatedMoviesExecute())!;
+          break;
+        case MovieCategory.upcoming:
+          movies = (await ref.read(fetchMoviesUsecaseProvider).fetchUpcomingMoviesExecute())!;
+          break;
+      }
+      state = {
+        ...state,
+        category: movies,
+      };
+    } catch (e) {
+      // 예외 처리
+      state = {
+        ...state,
+        category: [],
+      };
+      print('Error fetching movies for category $category: $e');
+    }
   }
 }
 
-final homepageListViewModel = NotifierProvider<HomePageViewModel, List<Movie>?>(
-  () => HomePageViewModel());
+final homepageListViewModel = NotifierProvider<HomePageViewModel, Map<MovieCategory, List<Movie>?>>(
+  () => HomePageViewModel(),
+);

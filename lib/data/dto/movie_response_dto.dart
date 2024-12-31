@@ -1,5 +1,3 @@
-import 'dart:core';
-
 class MovieResponseDto {
   bool adult;
   String backdroppath;
@@ -35,20 +33,20 @@ class MovieResponseDto {
 
   MovieResponseDto.fromJson(Map<String, dynamic> json)
       : this(
-          adult: json['adult'],
-          backdroppath: json['backgroppath'] ?? '',
-          genre_ids: List<int>.from(json['genre_ids']),
-          id: json['id'],
-          original_language: json['original_language'],
-          original_title: json['original_title'],
-          overview: json['overview'],
-          popularity: json['popularity'],
-          poster_path: json['poster_path']?? '',
-          release_date: json['release_date'],
-          title: json['title'],
-          video: json['video'],
-          vote_average: json['vote_average'].toString(),
-          vote_count: json['vote_count'].toString(),
+          adult: json['adult'] ?? false,
+          backdroppath: json['backdroppath'] ?? '',
+          genre_ids: List<int>.from(json['genre_ids'] ?? []),
+          id: json['id'] ?? 0,
+          original_language: json['original_language'] ?? '',
+          original_title: json['original_title'] ?? '',
+          overview: json['overview'] ?? '',
+          popularity: json['popularity'] ?? 0.0,
+          poster_path: json['poster_path'] ?? '',
+          release_date: json['release_date'] ?? '',
+          title: json['title'] ?? '',
+          video: json['video'] ?? false,
+          vote_average: json['vote_average']?.toString() ?? '0.0',
+          vote_count: json['vote_count']?.toString() ?? '0',
         );
 
   MovieResponseDto copyWith({
@@ -87,19 +85,19 @@ class MovieResponseDto {
   Map<String, dynamic> toJson() {
     return {
       'adult': adult,
-      'backdroppath': backdroppath,
-      'genre_ids': genre_ids,
+      'backdroppath': backdroppath.isNotEmpty ? backdroppath : null,
+      'genre_ids': genre_ids.isNotEmpty ? genre_ids : null,
       'id': id,
-      'original_language': original_language,
-      'original_title': original_title,
-      'overview': overview,
+      'original_language': original_language.isNotEmpty ? original_language : null,
+      'original_title': original_title.isNotEmpty ? original_title : null,
+      'overview': overview.isNotEmpty ? overview : null,
       'popularity': popularity,
-      'poster_path': poster_path,
-      'title': title,
+      'poster_path': poster_path.isNotEmpty ? poster_path : null,
+      'title': title.isNotEmpty ? title : null,
       'video': video,
-      'release_date': release_date,
-      'vote_average': vote_average,
-      'vote_count': vote_count,
+      'release_date': release_date.isNotEmpty ? release_date : null,
+      'vote_average': vote_average.isNotEmpty ? vote_average : null,
+      'vote_count': vote_count.isNotEmpty ? vote_count : null,
     };
   }
 }

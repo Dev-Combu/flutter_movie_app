@@ -10,8 +10,6 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final movies = ref.watch(homepageListViewModel);
-
     return Scaffold(
       body: ListView(
         children: [
@@ -32,20 +30,20 @@ class HomePage extends ConsumerWidget {
               child: AspectRatio(
                 aspectRatio: 2 / 3,
                 child: Image.network(
-                  'https://image.tmdb.org/t/p/w400${movies?[0].poster_path}',
+                  'https://image.tmdb.org/t/p/w400${ref.watch(homepageListViewModel)[MovieCategory.popular]?.first.poster_path}',
                   fit: BoxFit.cover,
                 ),
               ),
             ),
           ),
           HomePageLabel(label: '현재 상영중'),
-          HorizontalList(),
+          HorizontalList(category: MovieCategory.nowPlaying),
           HomePageLabel(label: '인기순'),
-          HorizontalList(),
+          HorizontalList(category: MovieCategory.popular),
           HomePageLabel(label: '평점 높은순'),
-          HorizontalList(),
+          HorizontalList(category: MovieCategory.topRated),
           HomePageLabel(label: '개봉예정'),
-          HorizontalList(),
+          HorizontalList(category: MovieCategory.upcoming),
         ],
       ),
     );
