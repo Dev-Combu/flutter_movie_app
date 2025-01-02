@@ -26,6 +26,10 @@ class _DetailPageState extends ConsumerState<DetailPage> {
       body: Consumer(
         builder: (context, ref, child) {
           final movieInfo = ref.watch(detailpageViewModel);
+          // movieInfo가 null일 경우 로딩 인디케이터를 표시
+          if (movieInfo == null) {
+            return const Center(child: CircularProgressIndicator());
+          }
           return ListView(
             children: [
               Hero(
@@ -96,10 +100,17 @@ class _DetailPageState extends ConsumerState<DetailPage> {
                       child: ListView(
                         scrollDirection: Axis.horizontal,
                         children: [
-                          MovieSubInfo(label: '평점', value: movieInfo.voteAverage.toString()),
-                          MovieSubInfo(label: '투표수', value: movieInfo.voteCount.toString()),
-                          MovieSubInfo(label: '인기점수', value: movieInfo.popularity.toString()),
-                          MovieSubInfo(label: '수익', value: movieInfo.revenue.toString()),
+                          MovieSubInfo(
+                              label: '평점',
+                              value: movieInfo.voteAverage.toString()),
+                          MovieSubInfo(
+                              label: '투표수',
+                              value: movieInfo.voteCount.toString()),
+                          MovieSubInfo(
+                              label: '인기점수',
+                              value: movieInfo.popularity.toString()),
+                          MovieSubInfo(
+                              label: '수익', value: movieInfo.revenue.toString()),
                         ],
                       ),
                     ),

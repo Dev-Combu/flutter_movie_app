@@ -29,10 +29,20 @@ class HomePage extends ConsumerWidget {
               },
               child: AspectRatio(
                 aspectRatio: 2 / 3,
-                child: Image.network(
-                  'https://image.tmdb.org/t/p/w400${ref.watch(homepageListViewModel)[MovieCategory.popular]?.first.poster_path}',
-                  fit: BoxFit.cover,
-                ),
+                child: ref
+                            .watch(homepageListViewModel)[MovieCategory.popular]
+                            ?.first
+                            .poster_path !=
+                        null
+                    ? Image.network(
+                        'https://image.tmdb.org/t/p/w300${ref.watch(homepageListViewModel)[MovieCategory.popular]?.first.poster_path}',
+                        fit: BoxFit.cover,
+                        
+                      )
+                    : Container(
+                        color: Colors.grey, // 기본 배경 색상
+                        child: Center(child: Text('이미지 정보가 없습니다.')),
+                      ),
               ),
             ),
           ),
