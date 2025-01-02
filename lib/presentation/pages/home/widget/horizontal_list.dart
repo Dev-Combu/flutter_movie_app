@@ -56,10 +56,7 @@ class _HorizontalListState extends ConsumerState<HorizontalList> {
                       borderRadius: BorderRadius.circular(10),
                       child: SizedBox(
                         width: 120,
-                        child: Image.network(
-                                  movie.poster_path.isNotEmpty
-                              ? 'https://image.tmdb.org/t/p/w400${movie.poster_path}'
-                              : 'https://via.placeholder.com/400${movie.backdroppath}', // 대체 이미지 URL
+                        child: Image.network('https://image.tmdb.org/t/p/w400${movie.poster_path}',
                           fit: BoxFit.cover,
                         ),
                       ),

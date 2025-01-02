@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_movie_app/presentation/pages/detail/detail_view_model.dart';
 import 'package:flutter_movie_app/presentation/pages/detail/widgets/movie_sub_info.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 
 class DetailPage extends ConsumerStatefulWidget {
   final int id;
@@ -26,7 +27,6 @@ class _DetailPageState extends ConsumerState<DetailPage> {
       body: Consumer(
         builder: (context, ref, child) {
           final movieInfo = ref.watch(detailpageViewModel);
-          // movieInfo가 null일 경우 로딩 인디케이터를 표시
           if (movieInfo == null) {
             return const Center(child: CircularProgressIndicator());
           }
@@ -50,8 +50,11 @@ class _DetailPageState extends ConsumerState<DetailPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(movieInfo!.title),
-                        Text(movieInfo!.releaseDate.toString())
+                        Text(movieInfo!.title, style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold
+                        ),),
+                        Text(DateFormat("yyyy-MM-dd").format(movieInfo!.releaseDate))
                       ],
                     ),
                     Text(movieInfo!.tagline),
@@ -96,7 +99,7 @@ class _DetailPageState extends ConsumerState<DetailPage> {
                     Divider(height: 10),
                     Text('흥행정보'),
                     SizedBox(
-                      height: 80,
+                      height: 70,
                       child: ListView(
                         scrollDirection: Axis.horizontal,
                         children: [
