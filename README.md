@@ -1,6 +1,6 @@
 # flutter_movie_app
 
-A new Flutter project.
+TMDB API를 이용해서 만드는 영화 정보 앱
 
 ## Getting Started
 
