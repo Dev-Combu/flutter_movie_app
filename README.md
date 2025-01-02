@@ -15,6 +15,42 @@ TMDB API를 이용해서 만드는 영화 정보 앱
 - API
     - TMDB API를 이용해서 영화 정보를 가져옴
 
+## 🗄️ 프로젝트 디렉터리 구조
+
+<pre>
+lib
+|
+|-- data
+|    |-- data_source
+|         |-- movie_asset_data_source_impl.dart
+|         |-- movie_data_source.dart
+|    |-- dto
+|         |-- movie_detail_dto.dart
+|         |-- movie_repponse_dto.dart
+|    |-- repository
+|         |-- movie_repository_impl.dart
+|
+|-- domain
+|    |-- entity
+|         |-- movie_detail.dart
+|         |-- movie.dart
+|    |-- repository
+|         |-- movie_repository.dart
+|    |-- usecase
+|         |-- fetch_movies_usecase.dart
+|
+|-- presentation
+|    |-- data_source
+|         |-- movie_asset_data_source_impl.dart
+|         |-- movie_data_source.dart
+|    |-- dto
+|         |-- movie_detail_dto.dart
+|         |-- movie_repponse_dto.dart
+|    |-- repository
+|         |-- movie_repository_impl.dart
+|
+
+</pre>
 
 ## 📋 커밋 컨벤션
 - `add` : 새로운 파일 및 폴더 추가
